@@ -31,13 +31,19 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = progress*10;
+                progress = progress * 10;
                 textSeekBar.setText(progress + "%");
+                double valor = Double.parseDouble(editTextValor.getText().toString());
+                String valorTexto = String.valueOf(valor * progress / 100);
+                editTextGorjeta.setText("R$ " + valorTexto);
+                editTextTotal.setText("R$ " + );
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                //double valor = Double.parseDouble(editTextTotal.getText().toString());
+                //String valorTexto = String.valueOf(valor * seekBar.getProgress() * 10);
+                //editTextGorjeta.setText(valorTexto);
             }
 
             @Override
@@ -45,5 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+
 }
