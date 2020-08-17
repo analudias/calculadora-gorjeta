@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -36,17 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //definindo o valor da progresso para a porcentagem para não causar erro no cálculo com números decimais
                 porcentagem = progress;
-                textSeekBar.setText(porcentagem + "%");
-
-                //pegando o texto com o valor da conta e transformando em número
-                double valor = Double.parseDouble(editTextValor.getText().toString());
-                String valorTexto = String.valueOf(valor * porcentagem / 100);
-                textViewGorjeta.setText("R$ " + valorTexto);
-
-                //pegando o valor da gorjeta para calcular o valor total
-                Double valorTotal = Double.parseDouble(valorTexto);
-                String valorTextoTotal = String.valueOf(valorTotal + valor);
-                textViewTotal.setText("R$ " + valorTextoTotal);
+                textSeekBar.setText(Math.round(porcentagem) + "%");
+                calcular();
 
             }
 
@@ -64,6 +56,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void calcular(){
+
+        String valorRecuperado = editTextValor.getText().toString();
+        if(valorRecuperado == null || valorRecuperado.equals("")){
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Digite um valor primeiro!",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+        else{
+
+            //Converter string para double
+            double valorDigitado = Double.parseDouble(valorRecuperado);
+
+            //Calcula a gorjeta e total
+            double gorjeta = valorDigitado * (porcentagem / 100);
+            double total = gorjeta + valorDigitado;
+
+            //Exibe a gorjeta e total
+            textViewGorjeta.setText("R$ " + gorjeta);
+            textViewTotal.setText("R$ " + total);
+        }
     }
 
 
