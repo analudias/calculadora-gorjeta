@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText editTextValor;
     private TextView textSeekBar;
     private SeekBar seekBar;
-    private EditText editTextGorjeta;
-    private EditText editTextTotal;
+    private TextView textViewGorjeta;
+    private TextView textViewTotal;
     private int valor;
 
     @Override
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         editTextValor = findViewById(R.id.editTextValor);
         textSeekBar = findViewById(R.id.textSeekBar);
         seekBar = findViewById(R.id.seekBar);
-        editTextGorjeta = findViewById(R.id.editTextGorjeta);
-        editTextTotal = findViewById(R.id.editTextTotal);
+        textViewGorjeta = findViewById(R.id.textViewGorjeta);
+        textViewTotal = findViewById(R.id.textViewTotal);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
 
                 valor = Integer.parseInt(editTextValor.getText().toString());
                 String valorTexto = String.valueOf(valor * progress / 100);
-                editTextGorjeta.setText("R$ " + valorTexto);
+                textViewGorjeta.setText("R$ " + valorTexto);
 
-                editTextTotal.setText(editTextValor.getText());
+                textViewTotal.setText(editTextValor.getText());
 
                 Double valorTotal = Double.parseDouble(valorTexto);
                 String valorTextoTotal = String.valueOf(valorTotal + valor);
-                editTextTotal.setText("R$ " + valorTextoTotal);
+                textViewTotal.setText("R$ " + valorTextoTotal);
 
 
             }
