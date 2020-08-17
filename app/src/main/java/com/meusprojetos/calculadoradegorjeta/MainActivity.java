@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView textViewGorjeta;
     private TextView textViewTotal;
-    private int valor;
+
+    private double porcentagem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +33,26 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textSeekBar.setText(progress + "%");
 
-                valor = Integer.parseInt(editTextValor.getText().toString());
-                String valorTexto = String.valueOf(valor * progress / 100);
+                //definindo o valor da progresso para a porcentagem para não causar erro no cálculo com números decimais
+                porcentagem = progress;
+                textSeekBar.setText(porcentagem + "%");
+
+                //pegando o texto com o valor da conta e transformando em número
+                double valor = Double.parseDouble(editTextValor.getText().toString());
+                String valorTexto = String.valueOf(valor * porcentagem / 100);
                 textViewGorjeta.setText("R$ " + valorTexto);
 
-                textViewTotal.setText(editTextValor.getText());
-
+                //pegando o valor da gorjeta para calcular o valor total
                 Double valorTotal = Double.parseDouble(valorTexto);
                 String valorTextoTotal = String.valueOf(valorTotal + valor);
                 textViewTotal.setText("R$ " + valorTextoTotal);
-
 
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                //double valor = Double.parseDouble(editTextTotal.getText().toString());
-                //String valorTexto = String.valueOf(valor * seekBar.getProgress() * 10);
-                //editTextGorjeta.setText(valorTexto);
+
             }
 
             @Override
