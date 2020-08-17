@@ -103,7 +103,7 @@
         android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="16dp"
-        android:max="10"
+        android:max="100"
         android:progress="0"
         app:layout_constraintStart_toEndOf="@+id/textSeekBar"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />

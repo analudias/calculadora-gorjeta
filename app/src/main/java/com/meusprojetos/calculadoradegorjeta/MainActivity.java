@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private EditText editTextGorjeta;
     private EditText editTextTotal;
+    private int valor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,19 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = progress * 10;
                 textSeekBar.setText(progress + "%");
-                double valor = Double.parseDouble(editTextValor.getText().toString());
+
+                valor = Integer.parseInt(editTextValor.getText().toString());
                 String valorTexto = String.valueOf(valor * progress / 100);
                 editTextGorjeta.setText("R$ " + valorTexto);
-                editTextTotal.setText("R$ " + );
+
+                editTextTotal.setText(editTextValor.getText());
+
+                Double valorTotal = Double.parseDouble(valorTexto);
+                String valorTextoTotal = String.valueOf(valorTotal + valor);
+                editTextTotal.setText("R$ " + valorTextoTotal);
+
+
             }
 
             @Override
@@ -48,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+
+
 
             }
         });
